@@ -133,6 +133,10 @@ void debugPrintf(const int level, const char *format, ...)
 	va_start(args, format);
 	vprintf(format, args);
 	va_end(args);
+
+#ifndef NDEBUG
+    fflush(stdout);
+#endif
 }
 
 char* strtrim(char *str)
@@ -273,7 +277,7 @@ void MasterdCore::RunThread(void)
 	ServerAddress *addr;
 	Packet *data;
 	tPeerRecord *peerrec;
-	
+
 	
 	// print welcome message
 	debugPrintf(DPRINT_INFO, " - Welcome to the Push Button Master Server 0.96\n");
