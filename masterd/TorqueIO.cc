@@ -506,3 +506,124 @@ void sendListResponse(tMessageSession &msg, U8 index)
 	// done
 }
 
+// This is called when a client wishes to arrange a connection with a
+// server.
+bool handleArrangedConnectRequest(tMessageSession &msg)
+{
+    // TODO: Handle Arranged Connect Request
+
+//    // First, make sure that we're connected with the server that they're requesting a connection with.
+//    MasterServerConnection *conn = (MasterServerConnection *) gNetInterface->findConnection(remoteAddress);
+//    if(!conn)
+//    {
+//        ByteBufferPtr ptr = new ByteBuffer((U8 *) MasterNoSuchHost, strlen(MasterNoSuchHost) + 1);
+//        c2mRejectArrangedConnection(requestId, ptr);
+//        return;
+//    }
+//
+//    // Record the request...
+//    GameConnectRequest *req = new GameConnectRequest;
+//    req->initiator = this;
+//    req->host = conn;
+//    req->initiatorQueryId = requestId;
+//    req->hostQueryId = mLastQueryId++;
+//    req->requestTime = Platform::getRealMilliseconds();
+//
+//    char buf[256];
+//    strcpy(buf, getNetAddress().toString());
+//    logprintf("Client: %s requested connection to %s",
+//              buf, conn->getNetAddress().toString());
+//
+//    // Add the request to the relevant lists (the global list, this connection's list,
+//    // and the other connection's list).
+//    mConnectList.push_back(req);
+//    conn->mConnectList.push_back(req);
+//    gConnectList.push_back(req);
+//
+//    // Do some DOS checking...
+//    checkActivityTime(2000);
+//
+//    // Get our address...
+//    Address theAddress = getNetAddress();
+//
+//    // Record some different addresses to try...
+//    Vector<IPAddress> possibleAddresses;
+//
+//    // The address, but port+1
+//    theAddress.port++;
+//    possibleAddresses.push_back(theAddress.toIPAddress());
+//
+//    // The address, with the original port
+//    theAddress.port--;
+//    possibleAddresses.push_back(theAddress.toIPAddress());
+//
+//    // Or the address the port thinks it's talking to.
+//    Address theInternalAddress(internalAddress);
+//    Address anyAddress;
+//
+//    // (Only store that last one if it's not the any address.)
+//    if(!theInternalAddress.isEqualAddress(anyAddress) && theInternalAddress != theAddress)
+//        possibleAddresses.push_back(internalAddress);
+//
+//    // And inform the other part of the request.
+//    conn->m2cClientRequestedArrangedConnection(req->hostQueryId, possibleAddresses, connectionParameters);
+
+    return false;
+}
+
+// Called to indicate a connect request is being accepted.
+bool handleAcceptArrangedConnect(tMessageSession &msg)
+{
+    // TODO: Handle Accept Arranged Connect
+
+//    GameConnectRequest *req = findAndRemoveRequest(requestId);
+//    if(!req)
+//        return;
+//
+//    Address theAddress = getNetAddress();
+//    Vector<IPAddress> possibleAddresses;
+//    theAddress.port++;
+//    possibleAddresses.push_back(theAddress.toIPAddress());
+//    theAddress.port--;
+//    possibleAddresses.push_back(theAddress.toIPAddress());
+//    Address theInternalAddress(internalAddress);
+//    Address anyAddress;
+//
+//    if(!theInternalAddress.isEqualAddress(anyAddress) && theInternalAddress != theAddress)
+//        possibleAddresses.push_back(internalAddress);
+//
+//    char buffer[256];
+//    strcpy(buffer, getNetAddress().toString());
+//
+//    logprintf("Server: %s accept connection request from %s", buffer,
+//              req->initiator.isValid() ? req->initiator->getNetAddress().toString() : "Unknown");
+//
+//    // If we still know about the requestor, tell him his connection was accepted...
+//    if(req->initiator.isValid())
+//        req->initiator->m2cArrangedConnectionAccepted(req->initiatorQueryId, possibleAddresses, connectionData);
+//
+//    delete req;
+
+    return false;
+}
+
+// Called to indicate a connect request is being rejected.
+bool handleRejectArrangedConnect(tMessageSession &msg)
+{
+    // TODO: Handle Reject Arranged Connect
+
+//    GameConnectRequest *req = findAndRemoveRequest(requestId);
+//    if(!req)
+//        return;
+//
+//    logprintf("Server: %s reject connection request from %s",
+//              getNetAddress().toString(),
+//              req->initiator.isValid() ? req->initiator->getNetAddress().toString() : "Unknown");
+//
+//    if(req->initiator.isValid())
+//        req->initiator->m2cArrangedConnectionRejected(req->initiatorQueryId, rejectData);
+//
+//    delete req;
+
+    return false;
+}

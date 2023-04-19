@@ -46,6 +46,14 @@
 #define	GameHeartbeat					22		// *
 #define MasterServerInfoRequest         24		// *, Torque doesn't use this...
 #define MasterServerInfoResponse        26
+//#define Punch                           40
+//#define ArrangedConnectRequest          42
+#define MasterServerArrangedConnectRequest        46
+#define MasterServerArrangedConnectResponse       48
+#define MasterServerAcceptArrangedConnectRequest  50
+#define MasterServerAcceptArrangedConnectResponse 52
+#define MasterServerRejectArrangedConnectRequest  54
+#define MasterServerRejectArrangedConnectResponse 56
 
 // Legend:
 //   * -- Implemented for Receive

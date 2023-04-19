@@ -446,6 +446,27 @@ BadRepPeer:
 			break;
 		}
 
+        case MasterServerArrangedConnectRequest:
+        {
+                debugPrintf(DPRINT_VERBOSE, "Received MasterServerArrangedConnectRequest\n");
+                result = handleArrangedConnectRequest(message);
+            break;
+        }
+
+        case MasterServerAcceptArrangedConnectRequest:
+        {
+            debugPrintf(DPRINT_VERBOSE, "Received MasterServerAcceptArrangedConnectRequest\n");
+            result = handleAcceptArrangedConnect(message);
+            break;
+        }
+
+        case MasterServerRejectArrangedConnectRequest:
+        {
+            debugPrintf(DPRINT_VERBOSE, "Received MasterServerRejectArrangedConnectRequest\n");
+            result = handleRejectArrangedConnect(message);
+            break;
+        }
+
 		default:
 		{
 			debugPrintf(DPRINT_VERBOSE, "Unknown Packet Type %d\n", pack_type);

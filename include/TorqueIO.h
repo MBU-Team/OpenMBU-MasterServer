@@ -43,6 +43,9 @@ bool handleInfoRequest (tMessageSession &msg);
 bool handleTypesRequest(tMessageSession &msg);
 bool handleInfoResponse(tMessageSession &msg);
 bool handleHeartbeat   (tMessageSession &msg);
+bool handleArrangedConnectRequest(tMessageSession &msg);
+bool handleAcceptArrangedConnect(tMessageSession &msg);
+bool handleRejectArrangedConnect(tMessageSession &msg);
 
 // Senders
 class ServerResults; // We can't do this because it breaks delete
