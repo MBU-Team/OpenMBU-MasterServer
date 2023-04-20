@@ -350,6 +350,8 @@ public:
 
 	virtual void QueryServers(Session *session, ServerFilter *filter) = 0;
 
+    virtual bool HasArrangedConnectServer(U32 addr) = 0;
+
 	virtual U32 getCount() = 0;
 };
 

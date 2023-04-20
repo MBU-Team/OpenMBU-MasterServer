@@ -512,27 +512,31 @@ bool handleArrangedConnectRequest(tMessageSession &msg)
 {
     // TODO: Handle Arranged Connect Request
 
+//    U32 addr = msg.pack->readU32();
+//    //U16 port = msg.pack->readU16();
+//
 //    // First, make sure that we're connected with the server that they're requesting a connection with.
-//    MasterServerConnection *conn = (MasterServerConnection *) gNetInterface->findConnection(remoteAddress);
-//    if(!conn)
+//    if (gm_pStore->HasArrangedConnectServer(addr))
 //    {
-//        ByteBufferPtr ptr = new ByteBuffer((U8 *) MasterNoSuchHost, strlen(MasterNoSuchHost) + 1);
-//        c2mRejectArrangedConnection(requestId, ptr);
-//        return;
+//        //ByteBufferPtr ptr = new ByteBuffer((U8 *) MasterNoSuchHost, strlen(MasterNoSuchHost) + 1);
+//        //c2mRejectArrangedConnection(requestId, ptr);
+//
+//        // TODO: Reject the connection
+//        return true;
 //    }
 //
 //    // Record the request...
 //    GameConnectRequest *req = new GameConnectRequest;
 //    req->initiator = this;
-//    req->host = conn;
+//    req->host = addr;
 //    req->initiatorQueryId = requestId;
 //    req->hostQueryId = mLastQueryId++;
 //    req->requestTime = Platform::getRealMilliseconds();
 //
 //    char buf[256];
-//    strcpy(buf, getNetAddress().toString());
+//    strcpy(buf, msg.addr->toString());
 //    logprintf("Client: %s requested connection to %s",
-//              buf, conn->getNetAddress().toString());
+//              buf, addr.toString());
 //
 //    // Add the request to the relevant lists (the global list, this connection's list,
 //    // and the other connection's list).
@@ -566,7 +570,9 @@ bool handleArrangedConnectRequest(tMessageSession &msg)
 //        possibleAddresses.push_back(internalAddress);
 //
 //    // And inform the other part of the request.
-//    conn->m2cClientRequestedArrangedConnection(req->hostQueryId, possibleAddresses, connectionParameters);
+//    m2cClientRequestedArrangedConnection(addr, req->hostQueryId, possibleAddresses, connectionParameters);
+//
+//    return true;
 
     return false;
 }

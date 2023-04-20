@@ -22,6 +22,7 @@
 
 #include "masterd.h"
 #include <stdlib.h>
+#include <algorithm>
 
 
 // Trick to allow conditional compilation of sqlite.
@@ -105,6 +106,11 @@ bool ServerStoreRAM::FindServer(ServerAddress *addr, ServerInfo **serv)
 	return (*serv != NULL);
 }
 
+bool ServerStoreRAM::HasArrangedConnectServer(U32 addr)
+{
+    return std::find(m_ArrangedConnectServers.begin(), m_ArrangedConnectServers.end(), addr) != m_ArrangedConnectServers.end();
+}
+
 void ServerStoreRAM::AddServer(ServerAddress *addr, ServerInfo *info)
 {
 	U64			slot = AddrToSlot(addr);
@@ -115,7 +121,6 @@ void ServerStoreRAM::AddServer(ServerAddress *addr, ServerInfo *info)
 	if(!addr || !info)
 		return;
 
-	
 	// add missing information
 	info->last_info		= getAbsTime();
 	info->addr			= *addr;
@@ -137,6 +142,9 @@ void ServerStoreRAM::AddServer(ServerAddress *addr, ServerInfo *info)
 
 	// don't destroy player list, we're using it
 	info->setToDestroy(false);
+
+    // add to arranged connect server list
+    m_ArrangedConnectServers.push_back(addr->address);
 	
 	// done
 }
@@ -146,6 +154,8 @@ void ServerStoreRAM::RemoveServer(tcServerMap::iterator &it)
 	ServerInfo *info;
 	info = &it->second;
 	char *str;
+
+    ServerAddress* addr = &info->addr;
 
 	
 	debugPrintf(DPRINT_VERBOSE, "Remove Server [%s:%hu] Game:\"%s\", Mission:\"%s\"\n",
@@ -162,6 +172,11 @@ void ServerStoreRAM::RemoveServer(tcServerMap::iterator &it)
 
 	// delete the record
 	m_Servers.erase(it);
+
+    // remove from arranged connect server list
+    auto position = std::find(m_ArrangedConnectServers.begin(), m_ArrangedConnectServers.end(), info->addr.address);
+    if (position != m_ArrangedConnectServers.end()) // == myVector.end() means the element was not found
+        m_ArrangedConnectServers.erase(position);
 
 	// done
 }
